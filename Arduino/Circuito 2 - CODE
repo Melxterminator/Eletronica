@@ -1,0 +1,48 @@
+/* Uma avenida da cidade não permite que os pedestre atravessem a rua e troquem de calçada, isso tem gerado muitos acidentes. Portanto,
+afim de solucionar o problema, desvolva um código onde permita que os pedestres troquem de calçada quando o botão s1 for pressionado.*/
+
+int S1 = 3;//declaro que o pino 3 será a 'entrada' do botão S1 de acionamento do pedestre
+
+//Declaração variáveis pedestres
+int ped_green = 8; // declaro que o pino 8 será o 'saida'
+int ped_red = 12; // declaro que o pino 12 será o 'saida'
+
+//Declaração variáveis carros
+int car_red = 2;// declaro que o pino 2 será o 'saida'
+int car_yellow = 4; // declaro que o pino 4 será o 'saida'
+int car_green = 7;// declaro que o pino 12 será o 'saida'
+
+//menu principal de configuração
+void setup() 
+{
+  pinMode(S1, INPUT);//declaro que o pino S1 é entrada
+  pinMode(ped_green, OUTPUT);//declaro que o pino ped_green é saida
+  pinMode(ped_red, OUTPUT);//declaro que o pino ped_red é saida
+  pinMode(car_red, OUTPUT);//declaro que o pino car_red é saida
+  pinMode(car_yellow, OUTPUT);//declaro que o pino car_yellow é saida
+  pinMode(car_green, OUTPUT);//declaro que o pino car_green é saida
+  
+  digitalWrite(car_green, HIGH);//escrevo '1' na saída car_green, deixando o semaforo verde para os carros
+  digitalWrite(ped_red, HIGH);//escrevo '1' na saída ped_red, deixando o sinalização vermelha para os pedestre
+  
+}
+
+//menu para rodar função "sem fim"
+void loop(){ 
+  if ((digitalRead(S1) == HIGH)){ //se leio '1' na entrada do botão, o pedestre clica e solicita a abertura da sinalização verde para passar
+    delay(3000); // tempo de 3s
+    digitalWrite(car_green, LOW);//escrevo '0' na saída car_green, o semaforo "fecha", desligando o sinal verde
+    digitalWrite(car_yellow, HIGH);//escrevo '1' na saída car_yellow, o semaforo fica amarelo, sinalização para o motorista que o semaforo vai ficar vermelho
+    delay(1000); // tempo de 1 s
+    digitalWrite(car_yellow, LOW);//escrevo '0' na saída car_yellow, desliga a sinalização amarela e o semaforo fica vermelho
+    digitalWrite(ped_red, LOW);//escrevo '0' na saída ped_red, desliga o sinal vermelho
+    digitalWrite(ped_green, HIGH);//escrevo '1' na saída ped_green, a sinalização do pedestre fica verde, para que possa atravessar a faixa com segurança   
+    digitalWrite(car_red, HIGH);//escrevo '1' na saída car_red, o semaforo fica vermelho, sinalizando que o carro deve parar e deixar os pedestres passarem
+  	delay(7000); //tempo de 7s
+    digitalWrite(car_green, HIGH);//escrevo '1' na saída car_green, após o delay, o semaforo fica verde para os carros
+    digitalWrite(ped_red, HIGH);//escrevo '1' na saída ped_red, após o delay, a sinalização fica vermelha para os pedestres
+    digitalWrite(ped_green, LOW);//escrevo '0' na saída ped_green, após o delay, a sinalização desliga a o sinal verde para os pedestres
+  	digitalWrite(car_red, LOW);//escrevo '0' na saída car_green, após o delay, , o semaforo desliga a o sinal vermelho para os carros
+  }  
+}
+  
