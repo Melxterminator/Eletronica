@@ -1,0 +1,49 @@
+// Circuito 3
+//
+#include <Adafruit_LiquidCrystal.h> // Incluir a biblioteca do display
+
+
+Adafruit_LiquidCrystal lcd(0);
+int s1 = 7; //declaro que o s1 está no pino 7
+
+void setup()//menu de configuração
+{
+  lcd.begin(16, 2); //liga a interface e define suas dimensões
+  pinMode(s1, INPUT);//declaro que o pino S1 é entrada
+  
+  //mensagem 1
+  lcd.setCursor(0, 0); // escolhe o posicionamento da mensagem tela superior
+  lcd.print("AGUARDE..."); // Tela apresenta a mensagem na tela "AGUARDE"
+  delay(3000); // A mensagem fica por 3 segundos até partir para outro comando
+  lcd.clear(); // Limpa o conteúdo da mensagem
+ 
+  
+}
+
+void loop() // menu para rodar função "sem fim"
+{
+  //mensagem 2
+  lcd.setCursor(0, 0); // escolhe o posicionamento da mensagem tela superior
+  lcd.print(" ***SENAI*** - ");// Tela apresenta a mensagem na tela "***SENAI***" na parte superior
+  lcd.setCursor(0, 1); // escolhe o posicionamento da mensagem tela inferior
+  lcd.print("MELISSA"); // Tela apresenta a mensagem na tela "Melissa" na parte inferior
+  delay(10000); // A mensagem fica por 10 segundos até partir para outro comando
+  lcd.clear();// Limpa o conteúdo da mensagem
+  
+  //mensagem 3
+  lcd.setCursor(0, 0); // escolhe o posicionamento da mensagem tela superior
+  lcd.print(" CURSO TEC SEMI - ");// Tela apresenta a mensagem na tela "CURSO TEC SEMI - " na parte superior
+  lcd.setCursor(0, 1); //escolhe o posicionamento da mensagem tela inferior
+  lcd.print("MECATRONICA CMC");// Tela apresenta a mensagem na tela "MECATRONICA" na parte inferior
+  delay(10000); // A mensagem fica por 10 segundos até partir para outro comando
+  lcd.clear();// Limpa o conteúdo da mensagem
+  
+  //desligando o 
+  	if ((digitalRead(s1) == HIGH)) { //se leio '1' na entrada do botão, o mesmo desliga a tela
+  		lcd.clear();// Limpa o conteúdo da mensagem
+  		lcd.print(" DESLIGANDO... ");// Tela apresenta a mensagem na tela "DESLIGANDO " na parte superior
+  		delay(2000); // tempo de 2s
+  		lcd.noDisplay (); // display fica sem conteúdo
+  		lcd.setBacklight(0); // display apaga
+  }
+}
