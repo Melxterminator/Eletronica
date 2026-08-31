@@ -1,0 +1,25 @@
+// C++ code - Ligação LDR/LED/Arduino
+//
+int luz = 13;
+int LDR = A1;
+
+void setup()
+{
+  pinMode(luz, OUTPUT); // LED na porta 13
+  pinMode(LDR, INPUT); // LDR na porta A0
+  Serial.begin(9600);
+}
+
+void loop(){
+
+  
+  int valorLDR = analogRead (luz);
+  Serial.println (valorLDR);
+  
+  if (luz <= 90) {
+    digitalWrite(luz, HIGH); //Liga o Led
+    Serial.println(luz);
+  } else { 
+    digitalWrite(luz, LOW); // Desliga o Led
+  }
+}
